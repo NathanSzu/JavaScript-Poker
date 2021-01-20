@@ -15,18 +15,26 @@ var deckOfCards = [
     'Ace of Hearts', 'Ace of Clubs', 'Ace of Diamonds', 'Ace of Spades',
 ]
 
-var discardPile = []
+var discardPile = [];
+
+var hand = [];
 
 var drawCard = () => {
     if (deckOfCards.length === 0) {
         console.log('Deck is Empty')
     } else {
-        console.log(deckOfCards[Math.floor(Math.random() * deckOfCards.length)])
+        hand.push(deckOfCards[Math.floor(Math.random() * deckOfCards.length)]);
+        console.log('Hand', hand);
+        deckOfCards.splice((deckOfCards[Math.floor(Math.random() * deckOfCards.length)]), 1)
     }
 }
 
 var discard = () => {
-
+    if (hand.length === 0) {
+        console.log('Hand is Empty')
+    } else {
+        
+    }
 }
 
 drawCard()
