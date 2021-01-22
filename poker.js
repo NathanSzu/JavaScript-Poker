@@ -17,7 +17,7 @@ var playerHands = [
 
 
 
-var playerCount = 4;
+var playerCount = 8;
 
 
 var drawCard = () => {
@@ -59,28 +59,29 @@ var checkHandRank = (playerHand) => {
     var condensedValues = [...new Set(values)];
     var condensedSuits = [...new Set(suits)];
     var sequentialCheck = () => {
-        values.sort()
+        values.sort(function(a, b){return a-b})
         let output = true;
-        for (let i = 0; i < values.length; i++) {
-            if (values[i] === ) {
-                
-            } else
-            
+        for (let i = 0; i < (values.length - 1); i++) {
+            if (values[i] !== (values[i+1] - 1)) {
+                output = false;
+            }            
         }
+        console.log('Values: ', values);
+        return output
     }
 
-    if (condensedValues.length === 5 && values.includes('14') &&) {
+    // if (condensedValues.length === 5 && values.includes('14') &&) {
         
-    } else {
+    // } else {
         
-    }
+    // }
 
 
 
     console.log('Suits: ', suits);
-    console.log('Values: ', values);
-    console.log('Hand: ', playerHand);
+    // console.log('Hand: ', playerHand);
     console.log('Condensed Suits: ', condensedSuits)
+    console.log('Sequential Check: ', sequentialCheck())
 }
 
 
@@ -107,4 +108,6 @@ var showHands = () => {
 
 playGame()
 // showHands()
-checkHandRank(playerHands[0])
+for (let y = 0; y < playerCount; y++) {
+    checkHandRank(playerHands[y])
+}
