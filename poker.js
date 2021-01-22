@@ -2,6 +2,7 @@ var cards = require('./cardDeck')
 
 var discardPile = [];
 
+// Hand size that can change based on what game is played
 var handSize = 5;
 
 var playerHands = [
@@ -15,10 +16,8 @@ var playerHands = [
     [],
 ]
 
-
-
-var playerCount = 8;
-
+// Number of players that can change based on number of users or player selection
+var playerCount = 4;
 
 var drawCard = () => {
     var card = null;
@@ -66,7 +65,6 @@ var checkHandRank = (playerHand) => {
                 output = false;
             }            
         }
-        console.log('Values: ', values);
         return output
     }
 
@@ -79,9 +77,11 @@ var checkHandRank = (playerHand) => {
 
 
     console.log('Suits: ', suits);
-    // console.log('Hand: ', playerHand);
-    console.log('Condensed Suits: ', condensedSuits)
-    console.log('Sequential Check: ', sequentialCheck())
+    console.log('Condensed Suits: ', condensedSuits);
+    console.log('Values: ', values);
+    console.log('Condensed Values: ', condensedValues)
+    console.log('Sequential Check: ', sequentialCheck());
+    console.log(' ')
 }
 
 
