@@ -10,7 +10,7 @@ var playerHands = [
     [],
     [],
     [],
-    [{ value: 8, title: 'Eight', suit: 'Hearts' }, { value: 9, title: 'nine', suit: 'Hearts' }, { value: 7, title: 'Seven', suit: 'Hearts' }, { value: 10, title: 'Ten', suit: 'diamonds' }, { value: 11, title: 'Jack', suit: 'Hearts' }],
+    [{ value: 8, title: 'Eight', suit: 'Hearts' }, { value: 8, title: 'Eight', suit: 'Diamonds' }, { value: 10, title: 'Ten', suit: 'Clubs' }, { value: 14, title: 'Ace', suit: 'diamonds' }, { value: 11, title: 'Jack', suit: 'Hearts' }],
     [],
     [],
     [],
@@ -68,6 +68,15 @@ var checkHandRank = (playerHand) => {
         return output
     }
 
+    // To view hands
+    console.log(' ')
+    console.log('Suits: ', suits);
+    console.log('Condensed Suits: ', condensedSuits);
+    console.log('Values: ', values);
+    console.log('Condensed Values: ', condensedValues)
+    console.log('Sequential Check: ', sequentialCheck());
+    
+
     if (condensedValues.length === 5 && sequentialCheck() === true && condensedSuits.length === 1 && values.includes(14)) {
         // Royal Flush
         return 1
@@ -83,7 +92,7 @@ var checkHandRank = (playerHand) => {
         for (let i = 0; i < values.length; i++) {
             if (value1 === null) {
                 value1 = values[i]
-            } else if (value1 !== null && value2 === null){
+            } else if (value1 !== null && value2 === null && values[i] !==value1){
                 value2 = values[i]
             }
             
@@ -109,16 +118,43 @@ var checkHandRank = (playerHand) => {
     } else if (sequentialCheck() === true && condensedSuits.length > 1) {
         // Straight
         return 6
+    } else if (condensedValues.length === 3) {
+        // 3 of a kind or 2 pair
+        let value1 = null;
+        let value2 = null;
+        let value3 = null;
+        let value1Count = 0;
+        let value2Count = 0;
+        let value3Count = 0;
+        for (let i = 0; i < values.length; i++) {
+            if (value1 === null) {
+                value1 = values[i]
+            } else if (value1 !== null && value2 === null && values[i] !== value1){
+                value2 = values[i]
+            } else if (value1 !== null && value2 !== null && values[i] !== value1 && values[i] !== value2) {
+                value3 = values[i]
+            }
+            
+            if (values[i] === value1) {
+                value1Count += 1;
+            } else if (values[i] === value2) {
+                value2Count += 1;
+            } else if (values[i] === value3) {
+                value3Count += 1;
+            }
+        }
+        if (value1Count === 3 || value2Count === 3 || value3Count === 3) {
+            return 7
+        } else if (value1Count !== 3 && value2Count !== 3 && value3Count !== 3) {
+            return 8
+        }
+    } else if (condensedValues.length === 4) {
+        // One pair
+        return 9
+    } else {
+        // High card
+        return 10
     }
-
-
-
-    console.log('Suits: ', suits);
-    console.log('Condensed Suits: ', condensedSuits);
-    console.log('Values: ', values);
-    console.log('Condensed Values: ', condensedValues)
-    console.log('Sequential Check: ', sequentialCheck());
-    console.log(' ')
 }
 
 
