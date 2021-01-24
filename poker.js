@@ -10,7 +10,7 @@ var playerHands = [
     [],
     [],
     [],
-    [],
+    [{ value: 9, title: 'Nine', suit: 'Hearts' }, { value: 13, title: 'King', suit: 'Hearts' }, { value: 12, title: 'Queen', suit: 'Hearts' }, { value: 11, title: 'Jack', suit: 'Hearts' }, { value: 10, title: 'Ten', suit: 'Hearts' }],
     [],
     [],
     [],
@@ -68,11 +68,31 @@ var checkHandRank = (playerHand) => {
         return output
     }
 
-    // if (condensedValues.length === 5 && values.includes('14') &&) {
-        
-    // } else {
-        
-    // }
+    if (condensedValues.length === 5 && sequentialCheck() === true && condensedSuits.length === 1 && values.includes(14)) {
+        // Royal Flush
+        return 1
+    } else if (condensedValues.length === 5 && sequentialCheck() === true && condensedSuits.length === 1 && !values.includes(14)) {
+        // Straight flush
+        return 2
+    } else if (condensedValues.length === 2) {
+        let value1 = null;
+        let value2 = null;
+        let value1Count = null;
+        let value2Count = null;
+        for (let i = 0; i < values.length; i++) {
+            if (value1 === null) {
+                value1 = values[i]
+            } else if (value1 !== null && value2 === null){
+                value2 = values[i]
+            }
+            
+            if (values[i] === value1) {
+                value1Count += 1;
+            } else if (values[i] === value2) {
+                value2Count += 1;
+            }
+        }
+    }
 
 
 
@@ -108,6 +128,6 @@ var showHands = () => {
 
 playGame()
 // showHands()
-for (let y = 0; y < playerCount; y++) {
-    checkHandRank(playerHands[y])
+for (let y = 0; y < playerCount + 1; y++) {
+    console.log(checkHandRank(playerHands[y]))
 }
