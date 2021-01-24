@@ -10,7 +10,7 @@ var playerHands = [
     [],
     [],
     [],
-    [{ value: 9, title: 'Nine', suit: 'Hearts' }, { value: 9, title: 'nine', suit: 'Spades' }, { value: 9, title: 'Nine', suit: 'Diamonds' }, { value: 10, title: 'Ten', suit: 'Clubs' }, { value: 10, title: 'Ten', suit: 'Hearts' }],
+    [{ value: 8, title: 'Eight', suit: 'Hearts' }, { value: 9, title: 'nine', suit: 'Hearts' }, { value: 7, title: 'Seven', suit: 'Hearts' }, { value: 10, title: 'Ten', suit: 'diamonds' }, { value: 11, title: 'Jack', suit: 'Hearts' }],
     [],
     [],
     [],
@@ -75,11 +75,11 @@ var checkHandRank = (playerHand) => {
         // Straight flush
         return 2
     } else if (condensedValues.length === 2) {
+        // 4 of a kind or full house
         let value1 = null;
         let value2 = null;
         let value1Count = 0;
         let value2Count = 0;
-        // Set up to count values for 4 of a kind or full house
         for (let i = 0; i < values.length; i++) {
             if (value1 === null) {
                 value1 = values[i]
@@ -103,6 +103,12 @@ var checkHandRank = (playerHand) => {
         } else {
             console.log('Error 3 or 4')
         }
+    } else if (sequentialCheck() === false && condensedSuits.length === 1) {
+        // Flush
+        return 5
+    } else if (sequentialCheck() === true && condensedSuits.length > 1) {
+        // Straight
+        return 6
     }
 
 
