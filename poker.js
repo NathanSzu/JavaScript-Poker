@@ -54,6 +54,9 @@ var checkHandRank = (playerHand) => {
         values.push(playerHand[i].value)
     }
 
+    // High card will be used for tiebreakers
+    var highCard = null;
+
     // Condensed.length will be used to help check hands
     var condensedValues = [...new Set(values)];
     var condensedSuits = [...new Set(suits)];
@@ -65,8 +68,12 @@ var checkHandRank = (playerHand) => {
                 output = false;
             }            
         }
+        highCard = values[4]
         return output
     }
+
+    // Used to prevent unnecessary repetetive functions
+    let sequential = sequentialCheck()
 
     // To view hands
     console.log(' ')
@@ -74,15 +81,15 @@ var checkHandRank = (playerHand) => {
     console.log('Condensed Suits: ', condensedSuits);
     console.log('Values: ', values);
     console.log('Condensed Values: ', condensedValues)
-    console.log('Sequential Check: ', sequentialCheck());
+    console.log('Sequential Check: ', sequential);
     
 
-    if (condensedValues.length === 5 && sequentialCheck() === true && condensedSuits.length === 1 && values.includes(14)) {
+    if (condensedValues.length === 5 && sequential === true && condensedSuits.length === 1 && values.includes(14)) {
         // Royal Flush
-        return 1
-    } else if (condensedValues.length === 5 && sequentialCheck() === true && condensedSuits.length === 1 && !values.includes(14)) {
+        return { rank: 1, highCard: highCard }
+    } else if (condensedValues.length === 5 && sequential === true && condensedSuits.length === 1 && !values.includes(14)) {
         // Straight flush
-        return 2
+        return { rank: 2, highCard: highCard }
     } else if (condensedValues.length === 2) {
         // 4 of a kind or full house
         let value1 = null;
@@ -105,19 +112,19 @@ var checkHandRank = (playerHand) => {
 
         if (value1Count === 4 || value2Count === 4) {
             // 4 of a kind
-            return 3
+            return { rank: 3, highCard: highCard }
         } else if (value1Count === 3 || value2Count === 3) {
             // Full house
-            return 4
+            return { rank: 4, highCard: highCard }
         } else {
             console.log('Error 3 or 4')
         }
-    } else if (sequentialCheck() === false && condensedSuits.length === 1) {
+    } else if (sequential === false && condensedSuits.length === 1) {
         // Flush
-        return 5
-    } else if (sequentialCheck() === true && condensedSuits.length > 1) {
+        return { rank: 5, highCard: highCard }
+    } else if (sequential === true && condensedSuits.length > 1) {
         // Straight
-        return 6
+        return { rank: 6, highCard: highCard }
     } else if (condensedValues.length === 3) {
         // 3 of a kind or 2 pair
         let value1 = null;
@@ -144,16 +151,16 @@ var checkHandRank = (playerHand) => {
             }
         }
         if (value1Count === 3 || value2Count === 3 || value3Count === 3) {
-            return 7
+            return { rank: 7, highCard: highCard }
         } else if (value1Count !== 3 && value2Count !== 3 && value3Count !== 3) {
-            return 8
+            return { rank: 8, highCard: highCard }
         }
     } else if (condensedValues.length === 4) {
         // One pair
-        return 9
+        return { rank: 9, highCard: highCard }
     } else {
         // High card
-        return 10
+        return { rank: 10, highCard: highCard }
     }
 }
 
