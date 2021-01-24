@@ -1,5 +1,4 @@
 var deck = [
-    { value: 1, title: 'One', suit: 'Hearts' }, { value: 1, title: 'One', suit: 'Clubs' }, { value: 1, title: 'One', suit: 'Diamonds' }, { value: 1, title: 'One', suit: 'Spades' },
     { value: 2, title: 'Two', suit: 'Hearts' }, { value: 2, title: 'Two', suit: 'Clubs' }, { value: 2, title: 'Two', suit: 'Diamonds' }, { value: 2, title: 'Two', suit: 'Spades' },
     { value: 3, title: 'Three', suit: 'Hearts' }, { value: 3, title: 'Three', suit: 'Clubs' }, { value: 3, title: 'Three', suit: 'Diamonds' }, { value: 3, title: 'Three', suit: 'Spades' },
     { value: 4, title: 'Four', suit: 'Hearts' }, { value: 4, title: 'Four', suit: 'Clubs' }, { value: 4, title: 'Four', suit: 'Diamonds' }, { value: 4, title: 'Four', suit: 'Spades' },
