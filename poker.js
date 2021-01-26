@@ -72,6 +72,40 @@ var checkHandRank = (playerHand) => {
         return output
     }
 
+    // Function to count and store card values and qty's
+    var countValues = (values) => {
+
+        let valCount = {
+            val1: null, val1Count: 0,
+            val2: null, val2Count: 0,
+            val3: null, val3Count: 0,
+            val4: null, val4Count: 0,
+            val5: null, val5Count: 0
+        }
+
+        for (let i = 0; i < 5; i++) {
+            if (!valCount.val1 || values[i] === valCount.val1) {
+                valCount.val1 = values[i];
+                valCount.val1Count += 1; 
+            } else if (!valCount.val2 || values[i] === valCount.val2) {
+                valCount.val2 = values[i];
+                valCount.val2Count += 1;               
+            } else if (!valCount.val3 || values[i] === valCount.val3) {
+                valCount.val3 = values[i];
+                valCount.val3Count += 1;               
+            } else if (!valCount.val4 || values[i] === valCount.val4) {
+                valCount.val4 = values[i];
+                valCount.val4Count += 1;               
+            } else if (!valCount.val5 || values[i] === valCount.val5) {
+                valCount.val5 = values[i];
+                valCount.val5Count += 1;               
+            }
+            
+        }
+        console.log('ValCount: ', valCount)
+        return valCount
+    }
+
     // Used to prevent unnecessary repetetive functions
     let sequential = sequentialCheck()
 
@@ -157,6 +191,7 @@ var checkHandRank = (playerHand) => {
         }
     } else if (condensedValues.length === 4) {
         // One pair
+        countValues(values)
         return { rank: 9, highCard: highCard }
     } else {
         // High card
